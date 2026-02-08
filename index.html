@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Especial</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff0f3;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.4);
+            z-index: 10;
+            width: 320px;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 50px;
+            position: relative;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        #noBtn {
+            background-color: #808080;
+            color: white;
+            position: relative;
+            z-index: 11;
+        }
+
+      
+        #celebration {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            animation: fadeIn 1s forwards;
+        }
+
+        .ring {
+            font-size: 120px;
+            filter: drop-shadow(0 0 15px gold);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-box" class="container">
+        <div id="icon" style="font-size: 50px; margin-bottom: 10px;">🎁</div>
+        <h1 id="text">¿Te quieres casar conmigo?</h1>
+        
+        <div class="btn-group">
+            <button id="yesBtn" onclick="accepted()">¡SÍ!</button>
+            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+        </div>
+    </div>
+
+    <div id="celebration">
+        <div class="ring">💍</div>
+        <h1 style="color: #ff4d6d; text-shadow: 2px 2px 5px white; font-size: 40px;">Gracias por haber aceptado❤️</h1>
+        <p>Te amo mucho te prometo que sere un buen esposo, y sere mejor que ayer y tambien te voy a conquitar todos los dias mi amor, enserio que eres la luz de mi vida. Te seguire amando mi vida por siempre y para siempre. Yo te amo con el corazon y el alma tu eres dueña de mi vida y puedes hacer lo que tu quieras con este muchacho que esta profundamente enamorado de ti. Te pido perdon por todo lo que te eh hecho sufrir pero ten en cuenta que al pesar de los problemaa que tengamos siempre tendras mi apoyo y mi amor, mi confianza esta al 100% entregada a ti mi vida tu ya me has demostrado todo lo que es necesario para poder confiar, contigo me siento mas que bien, soy muy afortunado de tenerte a mi lado, espero que sea asi para toda la eternidad, te amo muchisimo amor. Con Amor Tu Diego</p>
+    </div>
+
+    <script>
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            btn.style.position = 'absolute';
+            
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function accepted() {
+            document.getElementById('main-box').style.display = 'none';
+            
+            const cel = document.getElementById('celebration');
+            cel.style.display = 'flex';
+            
+            document.body.style.background = "#ffb3c1";
+
+            for(let i=0; i<60; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '-20px';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                to { transform: translateY(110vh) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
